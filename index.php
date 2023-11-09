@@ -33,6 +33,12 @@ if (empty($botao)) {
 } else if ($botao == "Cadastrar") {
     $sql = "INSERT INTO colaboradores
     (id, nome, cpf, telefone, email, cargo, salario, cidade, contratado) VALUES ('', '$nome', '$cpf', '$telefone', '$email', '$cargo', '$salario', '$cidade', '$contratado')";
+} else if ($botao == "Excluir") {
+    $sql = "DELETE FROM colaboradores WHERE id = $id";
+} else if ($botao == "Alterar") {
+    $sql = "UPDATE colaboradores SET nome = '$nome', cpf = '$cpf', telefone = '$telefone', email = '$email', cargo = '$cargo', salario = '$salario', cidade = '$cidade', contratado = '$contratado' WHERE id = $id";
+} else if ($botao == "Recuperar") {
+    $sql = "SELECT * FROM colaboradores WHERE nome LIKE '%$pesquisa%' OR cpf LIKE '%$pesquisa%' OR telefone LIKE '%$pesquisa%' OR email LIKE '%$pesquisa%' OR cargo LIKE '%$pesquisa%' OR salario LIKE '%$pesquisa%' OR cidade LIKE '%$pesquisa%' OR contratado LIKE '%$pesquisa%'";
 }
 
 // tratando erros das operações C.E.R.A
@@ -81,26 +87,36 @@ if (!empty($selecionado)) {
 </head>
 
 <body>
+    <div class="container-fluid">
 
     <form name="func" method="POST">
+        <div class="form-group">
+            <label>ID<input type="text" name="id" value="<?php echo $id; ?>" class="form-control" /></label>
+            <label>Nome<input type="text" name="nome" value="<?php echo $nome; ?>" class="form-control" /></label>
+        </div> <br />
+        <div class="form-group">
+            <label>CPF<input type="text" name="cpf" value="<?php echo $cpf; ?>" class="form-control cpf" /></label>
+            <label>Telefone<input type="text" name="telefone" value="<?php echo $telefone; ?>" class="form-control phone_with_ddd" /></label>
+            <label>Email<input type="text" name="email" value="<?php echo $email; ?>" class="form-control email" /></label>
+        </div> <br />
+        <div class="form-group">
+            <label>Cargo<input type="text" name="cargo" value="<?php echo $cargo; ?>" class="form-control" /></label>
+            <label>Salário<input type="text" name="salario" value="<?php echo $salario; ?>" class="form-control money" /></label>
+            <label>Cidade<input type="text" name="cidade" value="<?php echo $cidade; ?>" class="form-control" /></label>
+            <label>Contratado<input type="text" name="contratado" value="<?php echo $contratado; ?>" class="form-control date" /></label>
+        </div> <br />
 
-        <label>ID<input type="text" name="id" value="<?php echo $id; ?>" /></label> <br />
-        <label>Nome<input type="text" name="nome" value="<?php echo $nome; ?>" /></label> <br />
-        <label>CPF<input type="text" name="cpf" value="<?php echo $cpf; ?>" class="cpf" /></label> <br />
-        <label>Telefone<input type="text" name="telefone" value="<?php echo $telefone; ?>" class="phone_with_ddd" /></label> <br />
-        <label>Email<input type="text" name="email" value="<?php echo $email; ?>" class="email" /></label> <br />
-        <label>Cargo<input type="text" name="cargo" value="<?php echo $cargo; ?>" /></label> <br />
-        <label>Salário<input type="text" name="salario" value="<?php echo $salario; ?>" class="money" /></label> <br />
-        <label>Cidade<input type="text" name="cidade" value="<?php echo $cidade; ?>" /></label> <br />
-        <label>Contratado<input type="text" name="contratado" value="<?php echo $contratado; ?>" /></label> <br />
 
-
-        <input type="reset" name="botao" value="<?php echo $botao; ?>" />
+        <input type="submit" name="botao" value="Atualizar" />
+        <input type="submit" name="botao" value="Excluir" />
         <input type="submit" name="botao" value="Cadastrar" />
+        <br />
+        <input type="text" class="form-control" name="pesquisa" />
+        <input type="submit" name="botao" value="Recuperar" />
 
     </form>
 
-    <table>
+    <table class="table table-dark">
         <tr>
             <td></td>
             <td>ID</td>
@@ -114,14 +130,16 @@ if (!empty($selecionado)) {
             <td>Contrato</td>
         </tr>
         <?php
-        $sql_mostra_cad = "SELECT * FROM colaboradores ORDER BY id desc limit 0,10 ";
+        if(empty($pesquisa)){
+            $sql_mostra_cad = "SELECT * FROM colaboradores ORDER BY id desc limit 0,10 ";
+        }
         $resultado = mysqli_query($conexao, $sql_mostra_cad);
 
         while ($linha = mysqli_fetch_assoc($resultado))
             echo "
                 <tr>
                     <td>
-                        <a href='?id=" . $linha["id"] . "'>selecionar</a>
+                        <a href='?id=" . $linha["id"] . "'>Selecionar</a>
                     </td>
                     <td>" . $linha["id"] . "</td>
                     <td>" . $linha["nome"] . "</td>
@@ -137,6 +155,7 @@ if (!empty($selecionado)) {
 
         ?>
     </table>
+    </div>
 
     <script src="assets/lib/bootstrap-5.3.0/js/bootstrap.js"></script>
     <script src="assets/lib/jquery-3.7.0/script.js"></script>

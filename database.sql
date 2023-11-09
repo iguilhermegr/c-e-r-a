@@ -23,11 +23,13 @@ USE `gr` ;
 CREATE TABLE IF NOT EXISTS `gr`.`colaboradores` (
   `id` INT NOT NULL,
   `nome` VARCHAR(255) NULL,
-  `telefone` INT NULL,
+  `cpf` INT(11) NULL,
+  `telefone` INT(11) NULL,
   `email` VARCHAR(255) NULL,
   `cargo` VARCHAR(255) NULL,
   `salario` FLOAT NULL,
   `cidade` VARCHAR(255) NULL,
+  `contratado` DATETIME NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 

@@ -91,7 +91,11 @@ if (!empty($selecionado)) {
 
     <form name="func" method="POST">
         <div class="form-group">
-            <label>ID<input type="text" name="id" value="<?php echo $id; ?>" class="form-control" /></label>
+            <label>
+                ID
+                <input type="text" name="idi" value="<?php echo $id; ?>" disabled class="form-control" /><br />
+                <input type="hidden" name="id" value="<?php echo $id; ?>" class="form-control" />
+            </label>
             <label>Nome<input type="text" name="nome" value="<?php echo $nome; ?>" class="form-control" /></label>
         </div> <br />
         <div class="form-group">

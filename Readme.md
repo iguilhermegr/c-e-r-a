@@ -3,7 +3,7 @@
 ### <div align="center"><code> <strong>C</strong>adastrar.<strong>E</strong>xcluir.<strong>R</strong>ecuperar.<strong>A</strong>lterar </code></div>
 ### <div align="center"><code> Projeto desenvolvido durante as aulas de Banco de Dados </code></div>
 ### <div align="center"><code> com o <a href="https://github.com/profedvaldo">@profedvaldo</a> utilizando MySQL e PHP </code></div>
-### <div align="center"><code> Início [ 14.09.23  ] -> Término [ ??.??.?? ] </code></div>
+### <div align="center"><code> Início [ 14.09.23  ] -> Término [ 16.1.23 ] </code></div>
  
 
 -------------------------------------------------------------------------------------------------------------------------------------------
